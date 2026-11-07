@@ -119,24 +119,6 @@ npx serve .
 
 **Using VS Code Live Server:**
 Right-click on `index.html` and select **"Open with Live Server"**.
-
----
-
-## 🌐 Deployment
-
-### Deploy to Vercel
-1. Import this repository directly into [Vercel](https://vercel.com).
-2. Framework Preset: **Other** (Plain Static HTML).
-3. Build Command: *Leave blank*.
-4. Output Directory: `.`
-5. Click **Deploy**!
-
-### Deploy to GitHub Pages
-1. Navigate to **Settings > Pages** in your GitHub repository.
-2. Under **Build and deployment > Source**, select **Deploy from a branch**.
-3. Choose the `main` branch and `/ (root)` folder.
-4. Click **Save**.
-
 ---
 
 ## 📬 Connect & Socials
