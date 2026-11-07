@@ -2,14 +2,14 @@
 
 # 🌐 Pabitra Lenka — Portfolio & Techfolio
 
-[![Website Status](https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge)](https://pabitralenka.com)
+[![Website Status](https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge)](https://pabitralenka.in)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Zero Dependency](https://img.shields.io/badge/Runtime-Zero%20Dependency-orange?style=for-the-badge)](#-tech-stack--architecture)
 [![Vercel Ready](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
 
 **A high-performance, interactive, multi-disciplinary personal portfolio website crafted for the modern web.**
 
-[Live Preview](https://pabitralenka.com) • [Explore Disciplines](#-the-5-disciplines) • [Tech Stack](#-tech-stack--architecture) • [Getting Started](#-getting-started) • [Contact](#-connect--socials)
+[Live Preview](https://pabitralenka.in) • [Explore Disciplines](#-the-5-disciplines) • [Tech Stack](#-tech-stack--architecture) • [Getting Started](#-getting-started) • [Contact](#-connect--socials)
 
 </div>
 
