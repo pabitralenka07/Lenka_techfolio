@@ -3125,12 +3125,12 @@ try {
     const orbit = initOrbitImages(friendsContainer, {
       images: friendsList.map(f => ({ src: f.image, alt: f.name })),
       shape: 'ellipse',
-      radiusX: 420,
-      radiusY: 110,
-      rotation: -7,
-      duration: 36,
-      itemSize: 84,
-      depth: 0.58,
+      radiusX: 380,
+      radiusY: 105,
+      rotation: -6,
+      duration: 34,
+      itemSize: 80,
+      depth: 0.55,
       showPath: true,
       pathColor: 'rgba(128, 128, 128, 0.22)',
       pathWidth: 1.5,
@@ -3140,6 +3140,7 @@ try {
       hoverSpeed: 0.25,
       draggable: true,
       clickToFront: true,
+      height: 420,
       centerContent: renderCard(0),
       onItemClick: (index) => {
         updateActiveFriend(index);

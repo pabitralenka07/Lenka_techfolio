@@ -77,3 +77,4 @@ export const friendsList = [
 ];
 
 export default friendsList;
+

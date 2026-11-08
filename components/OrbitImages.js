@@ -211,7 +211,11 @@ export function initOrbitImages(container, options = {}) {
   const root = document.createElement('div');
   root.className = `orbit-container ${className}`.trim();
   root.style.width = toCssLength(width);
-  if (!autoHeight) root.style.height = toCssLength(height);
+  if (!autoHeight) {
+    root.style.height = toCssLength(height);
+  } else {
+    root.style.height = '100%';
+  }
 
   const parsedRadius =
     typeof itemRadius === 'number' ? `${(itemRadius / Math.max(1, itemSize)) * 100}%` : itemRadius;
@@ -456,13 +460,27 @@ export function initOrbitImages(container, options = {}) {
   };
 
   const layout = () => {
-    st.width = root.clientWidth;
-    st.height = root.clientHeight;
+    let w = root.clientWidth || target.clientWidth || 920;
+    let h = root.clientHeight || target.clientHeight;
+
+    const [bx0, by0, bx1, by1] = st.bbox || [0, 0, 1, 1];
+    const pathW = Math.max(1, bx1 - bx0);
+    const pathH = Math.max(1, by1 - by0);
+    const aspect = measuredAspect || (pathW / pathH) || 2.5;
+
+    if (!h || h < 140) {
+      h = Math.round(w / aspect);
+      root.style.height = `${h}px`;
+    }
+
+    st.width = w;
+    st.height = h;
+
     if (!st.lut) return;
-    const [bx0, by0, bx1, by1] = st.bbox;
-    const scale = Math.min(st.width / (bx1 - bx0), st.height / (by1 - by0));
-    st.scale = scale > 0 && isFinite(scale) ? scale : 0;
-    st.size = cfg.itemSize * st.scale;
+    const scale = Math.min(st.width / pathW, st.height / pathH);
+    st.scale = scale > 0 && isFinite(scale) ? scale : 0.85;
+    st.size = Math.max(38, cfg.itemSize * st.scale);
+
     for (const it of st.items) {
       it.el.style.width = `${st.size}px`;
       it.el.style.height = `${st.size}px`;
@@ -882,3 +900,4 @@ if (typeof window !== 'undefined') {
 }
 
 export default initOrbitImages;
+

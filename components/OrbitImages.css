@@ -4,13 +4,17 @@
 
 .orbit-container {
   position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
   margin-left: auto;
   margin-right: auto;
   isolation: isolate;
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  width: 100%;
+  display: block;
+  overflow: visible;
 }
 
 .orbit-container[data-draggable] {
@@ -53,27 +57,28 @@
   height: 100%;
   overflow: hidden;
   border-radius: var(--orbit-radius, 50%);
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 calc(var(--orbit-shadow, 0.3) * 16px) calc(var(--orbit-shadow, 0.3) * 36px)
-    rgba(0, 0, 0, calc(var(--orbit-shadow, 0.3) * 0.45));
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
   background: #2a2727;
+  box-sizing: border-box;
 }
 
 html[data-mode="dark"] .orbit-item-inner {
-  border-color: rgba(232, 228, 224, 0.2);
+  border-color: rgba(232, 228, 224, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 .orbit-item:hover .orbit-item-inner,
 .orbit-item:focus-visible .orbit-item-inner {
-  transform: scale(var(--orbit-hover-scale, 1.08));
+  transform: scale(var(--orbit-hover-scale, 1.12));
   border-color: #ffffff;
-  box-shadow: 0 0 24px rgba(255, 255, 255, 0.35), 0 12px 28px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.45), 0 10px 28px rgba(0, 0, 0, 0.5);
 }
 
 .orbit-item.is-active .orbit-item-inner {
   border-color: #ffffff;
-  box-shadow: 0 0 28px rgba(255, 255, 255, 0.4), 0 14px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.55), 0 12px 30px rgba(0, 0, 0, 0.6);
 }
 
 .orbit-item:focus-visible {
@@ -92,7 +97,6 @@ html[data-mode="dark"] .orbit-item-inner {
   object-fit: cover;
   pointer-events: none;
   -webkit-user-drag: none;
-  transition: filter 0.3s ease;
 }
 
 .orbit-center-content {
@@ -119,43 +123,46 @@ html[data-mode="dark"] .orbit-item-inner {
   align-items: center;
   text-align: center;
   padding: 1.35rem 1.6rem;
-  max-width: 320px;
-  width: 88%;
-  background: rgba(255, 255, 255, 0.85);
+  width: 320px;
+  max-width: calc(100vw - 48px);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(26, 24, 24, 0.1);
+  border: 1px solid rgba(26, 24, 24, 0.12);
   border-radius: 1.25rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.04);
   pointer-events: auto;
   font-family: inherit;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  white-space: normal;
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease;
 }
 
 html[data-mode="dark"] .orbit-center-card {
-  background: rgba(23, 21, 21, 0.88);
-  border-color: rgba(232, 228, 224, 0.12);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 4px 16px rgba(0, 0, 0, 0.35);
+  background: rgba(23, 21, 21, 0.9);
+  border-color: rgba(232, 228, 224, 0.15);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .orbit-friend-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.2rem 0.65rem;
-  margin-bottom: 0.65rem;
+  padding: 0.22rem 0.7rem;
+  margin-bottom: 0.6rem;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 999px;
-  background: rgba(var(--foreground-rgb, 26, 24, 24), 0.06);
+  background: rgba(var(--foreground-rgb, 26, 24, 24), 0.07);
   color: var(--muted, #726b66);
 }
 
 html[data-mode="dark"] .orbit-friend-badge {
   background: rgba(232, 228, 224, 0.08);
-  color: rgba(232, 228, 224, 0.7);
+  color: rgba(232, 228, 224, 0.75);
 }
 
 .orbit-friend-badge i {
@@ -168,31 +175,34 @@ html[data-mode="dark"] .orbit-friend-badge {
 
 .orbit-friend-name {
   margin: 0 0 0.25rem;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--foreground, #1a1818);
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .orbit-friend-role {
   margin: 0 0 0.5rem;
-  font-size: 0.8125rem;
+  font-size: 0.84rem;
   font-weight: 500;
   color: var(--muted, #726b66);
+  white-space: nowrap;
 }
 
 .orbit-friend-bio {
   margin: 0 0 1rem;
   font-size: 0.8125rem;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--muted, #726b66);
-  max-width: 28ch;
+  max-width: 32ch;
 }
 
 .orbit-friend-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.65rem;
 }
 
@@ -200,7 +210,7 @@ html[data-mode="dark"] .orbit-friend-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.45rem 0.95rem;
+  padding: 0.45rem 1rem;
   font-size: 0.8125rem;
   font-weight: 600;
   border-radius: 999px;
@@ -230,10 +240,10 @@ html[data-mode="dark"] .orbit-friend-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1px solid rgba(var(--foreground-rgb, 26, 24, 24), 0.12);
+  border: 1px solid rgba(var(--foreground-rgb, 26, 24, 24), 0.14);
   background: rgba(var(--foreground-rgb, 26, 24, 24), 0.04);
   color: var(--foreground, #1a1818);
   text-decoration: none;
@@ -241,8 +251,8 @@ html[data-mode="dark"] .orbit-friend-badge {
 }
 
 html[data-mode="dark"] .orbit-friend-social {
-  border-color: rgba(232, 228, 224, 0.14);
-  background: rgba(232, 228, 224, 0.05);
+  border-color: rgba(232, 228, 224, 0.16);
+  background: rgba(232, 228, 224, 0.06);
 }
 
 .orbit-friend-social:hover {
@@ -273,13 +283,13 @@ html[data-mode="dark"] .friends-section {
 .friends-section__in {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
   align-items: center;
   text-align: center;
 }
 
 .friends-section__hdr {
-  max-width: 44rem;
+  max-width: 46rem;
   margin: 0 auto;
 }
 
@@ -313,9 +323,10 @@ html[data-mode="dark"] .friends-section {
   position: relative;
   width: 100%;
   max-width: 980px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
+  height: 420px;
+  min-height: 380px;
+  margin: 1rem auto 0;
+  display: block;
 }
 
 .friends-section__pills {
@@ -323,8 +334,10 @@ html[data-mode="dark"] .friends-section {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.6rem;
-  max-width: 720px;
-  margin-top: 0.5rem;
+  max-width: 760px;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 10;
 }
 
 .friends-pill {
@@ -374,17 +387,31 @@ html[data-mode="dark"] .friends-pill {
   .friends-section {
     padding: 4rem 0 4.5rem;
   }
+  .friends-section__orbit-wrap {
+    height: 380px;
+    min-height: 340px;
+  }
   .orbit-center-card {
-    padding: 1rem 1.15rem;
-    max-width: 270px;
+    padding: 1.1rem 1.25rem;
+    width: 290px;
   }
   .orbit-friend-name {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   .orbit-friend-bio {
     font-size: 0.75rem;
-    max-width: 24ch;
+    max-width: 28ch;
     margin-bottom: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .friends-section__orbit-wrap {
+    height: 350px;
+  }
+  .orbit-center-card {
+    width: 270px;
+    padding: 1rem;
   }
 }
 
