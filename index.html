@@ -866,6 +866,14 @@ body{margin:0}
 .sf__ghost{display:inline-flex;align-items:center;height:3.5rem;padding:0 1.5rem;border-radius:999px;border:1px solid rgba(var(--sf-rgb),.2);background:none;color:var(--sf-fg);
   font:inherit;font-size:1rem;font-weight:500;cursor:pointer;transition:background .25s}
 .sf__ghost:hover{background:rgba(var(--sf-rgb),.07)}
+.sf__split{display:flex;flex-direction:column;gap:3rem}
+.sf__content{flex:1 1 60%}
+.sf__folder-wrap{flex:0 0 auto;display:flex;justify-content:center;align-items:flex-end;padding-top:100px;position:relative;z-index:5}
+@media (min-width:1024px){
+  .sf__split{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:3.5rem}
+  .sf__content{max-width:52rem}
+  .sf__folder-wrap{justify-content:flex-end;padding-top:140px;padding-bottom:.5rem;padding-right:.5rem}
+}
 .sf__cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.25rem 1.5rem;margin-top:5rem;padding-top:2.5rem;border-top:1px solid rgba(var(--sf-rgb),.12)}
 @media (min-width:768px){.sf__cols{grid-template-columns:2fr 1fr 1.25fr}}
 .sf__social ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
@@ -1047,6 +1055,7 @@ html[data-mode="dark"] .tech-section{
 }
 </style>
 <link rel="stylesheet" href="components/LogoLoop.css" />
+<link rel="stylesheet" href="components/FolderFloat.css" />
 <script>try{if(localStorage.getItem('pabitra-mode')==='dark'){document.documentElement.dataset.mode='dark';document.querySelector('meta[name=theme-color]')}}catch(e){}</script>
 <script>
 /* modest devices get the same site with the heaviest per-frame effects eased off */
@@ -1397,12 +1406,19 @@ if(m<=2||c<=2||s)document.documentElement.classList.add('lite');})();
 <div class="sfw">
 <footer class="sf" id="contact-footer" aria-labelledby="sfTitle">
   <div class="sf__in">
-    <p class="sf__eye"><i></i>Available for new work</p>
-    <h2 class="sf__h" id="sfTitle">Need something built?<span>Let's make it happen.</span></h2>
-    <p class="sf__p">I'm available for freelance work: websites, apps, interfaces and visual content. Tell me what you need and I'll get back to you within a day.</p>
-    <div class="sf__cta">
-      <a class="sf__btn" href="resume.pdf" target="_blank" rel="noopener noreferrer">Hire me <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></b></a>
-      <button class="sf__ghost" data-go="works">See my work</button>
+    <div class="sf__split">
+      <div class="sf__content">
+        <p class="sf__eye"><i></i>Available for new work</p>
+        <h2 class="sf__h" id="sfTitle">Need something built?<span>Let's make it happen.</span></h2>
+        <p class="sf__p">I'm available for freelance work: websites, apps, interfaces and visual content. Tell me what you need and I'll get back to you within a day.</p>
+        <div class="sf__cta">
+          <a class="sf__btn" href="resume.pdf" target="_blank" rel="noopener noreferrer">Hire me <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></b></a>
+          <button class="sf__ghost" data-go="works">See my work</button>
+        </div>
+      </div>
+      <div class="sf__folder-wrap">
+        <div id="certificatesFolderFloat"></div>
+      </div>
     </div>
     <div class="sf__cols">
       <div><h3>Work</h3><ul class="work"><li><a href="web-developer/" data-door="0">Web Development</a></li><li><a href="ai-ml-engineer/" data-door="1">AI/ML Engineering</a></li><li><a href="python-developer/" data-door="2">Python Development</a></li><li><a href="data-scientist/" data-door="3">Data Science</a></li><li><a href="photographer/" data-door="4">Photography</a></li></ul></div>
@@ -3001,9 +3017,11 @@ try {
   });
 })();
 </script>
+<script src="components/matter.min.js"></script>
 <script type="module">
   import { initLogoLoop } from './components/LogoLoop.js';
   import { techLogos } from './components/techData.js';
+  import { initFolderFloat } from './components/FolderFloat.js';
 
   const container = document.getElementById('techLogoLoop');
   if (container) {
@@ -3018,6 +3036,51 @@ try {
       fadeOutWidth: 0.12,
       labels: 'inline',
       ariaLabel: 'Technologies I Use'
+    });
+  }
+
+  const folderContainer = document.getElementById('certificatesFolderFloat');
+  if (folderContainer) {
+    initFolderFloat(folderContainer, {
+      items: [
+        { label: 'AI/ML Specialist · Mind Brain', value: 'ai-ml-engineer/' },
+        { label: 'Web Developer · Internpy', value: 'web-developer/' },
+        { label: 'B.Tech in Computer Science', value: '#about' },
+        { label: 'Python Specialist · NIT', value: 'python-developer/' },
+        { label: 'Data Science & Analytics', value: 'data-scientist/' },
+        { label: 'Creative Photography', value: 'photographer/' }
+      ],
+      label: 'Certificates & Awards',
+      sublabel: '6 badges',
+      trigger: 'hover',
+      closeOnSelect: true,
+      physics: true,
+      drift: 0.5,
+      folderColor: '#2b2727',
+      frontColor: '#3a3434',
+      paperColor: '#ded8d2',
+      itemColor: '#f5f0eb',
+      itemTextColor: '#181616',
+      labelColor: '#f0ece7',
+      width: 210,
+      height: 148,
+      radius: 14,
+      spread: 180,
+      lift: 26,
+      tilt: 8,
+      flapAngle: 34,
+      restAngle: 16,
+      openDuration: 520,
+      stagger: 45,
+      bounce: 0.3,
+      onSelect: (value, index) => {
+        if (value && value.startsWith('#')) {
+          const el = document.querySelector(value);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        } else if (value) {
+          window.location.href = value;
+        }
+      }
     });
   }
 </script>
