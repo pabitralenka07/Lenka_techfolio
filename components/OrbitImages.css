@@ -1,0 +1,395 @@
+/* ========================================================
+   OrbitImages Component CSS (React Bits Vanilla Port)
+   ======================================================== */
+
+.orbit-container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+}
+
+.orbit-container[data-draggable] {
+  cursor: grab;
+  touch-action: pan-y pinch-zoom;
+}
+
+.orbit-container[data-dragging],
+.orbit-container[data-dragging] * {
+  cursor: grabbing;
+}
+
+.orbit-path-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.orbit-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+}
+
+.orbit-container[data-intro] .orbit-item {
+  opacity: 0;
+}
+
+.orbit-item[data-clickable] {
+  cursor: pointer;
+}
+
+.orbit-item-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--orbit-radius, 50%);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 calc(var(--orbit-shadow, 0.3) * 16px) calc(var(--orbit-shadow, 0.3) * 36px)
+    rgba(0, 0, 0, calc(var(--orbit-shadow, 0.3) * 0.45));
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  background: #2a2727;
+}
+
+html[data-mode="dark"] .orbit-item-inner {
+  border-color: rgba(232, 228, 224, 0.2);
+}
+
+.orbit-item:hover .orbit-item-inner,
+.orbit-item:focus-visible .orbit-item-inner {
+  transform: scale(var(--orbit-hover-scale, 1.08));
+  border-color: #ffffff;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.35), 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.orbit-item.is-active .orbit-item-inner {
+  border-color: #ffffff;
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.4), 0 14px 32px rgba(0, 0, 0, 0.5);
+}
+
+.orbit-item:focus-visible {
+  outline: none;
+}
+
+.orbit-item:focus-visible .orbit-item-inner {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.orbit-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  transition: filter 0.3s ease;
+}
+
+.orbit-center-content {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.orbit-center-content > * {
+  pointer-events: auto;
+}
+
+/* ========================================================
+   Better Together - Friend Center Card & Pill Switchers
+   ======================================================== */
+
+.orbit-center-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.35rem 1.6rem;
+  max-width: 320px;
+  width: 88%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(26, 24, 24, 0.1);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+  pointer-events: auto;
+  font-family: inherit;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease;
+}
+
+html[data-mode="dark"] .orbit-center-card {
+  background: rgba(23, 21, 21, 0.88);
+  border-color: rgba(232, 228, 224, 0.12);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.orbit-friend-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.65rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(var(--foreground-rgb, 26, 24, 24), 0.06);
+  color: var(--muted, #726b66);
+}
+
+html[data-mode="dark"] .orbit-friend-badge {
+  background: rgba(232, 228, 224, 0.08);
+  color: rgba(232, 228, 224, 0.7);
+}
+
+.orbit-friend-badge i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #8FBF7A;
+}
+
+.orbit-friend-name {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--foreground, #1a1818);
+  line-height: 1.2;
+}
+
+.orbit-friend-role {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted, #726b66);
+}
+
+.orbit-friend-bio {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--muted, #726b66);
+  max-width: 28ch;
+}
+
+.orbit-friend-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.orbit-friend-portfolio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 999px;
+  background: var(--foreground, #1a1818);
+  color: var(--background, #fbf9f6);
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.orbit-friend-portfolio:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+.orbit-friend-portfolio svg {
+  width: 12px;
+  height: 12px;
+}
+
+.orbit-friend-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.orbit-friend-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--foreground-rgb, 26, 24, 24), 0.12);
+  background: rgba(var(--foreground-rgb, 26, 24, 24), 0.04);
+  color: var(--foreground, #1a1818);
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+html[data-mode="dark"] .orbit-friend-social {
+  border-color: rgba(232, 228, 224, 0.14);
+  background: rgba(232, 228, 224, 0.05);
+}
+
+.orbit-friend-social:hover {
+  transform: translateY(-2px);
+  background: var(--foreground, #1a1818);
+  color: var(--background, #fbf9f6);
+}
+
+.orbit-friend-social svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Section styling for Better Together */
+.friends-section {
+  position: relative;
+  padding: 5.5rem 0 6.5rem;
+  background: var(--background, #fbf9f6);
+  border-top: 1px solid rgba(26, 24, 24, 0.08);
+  overflow: hidden;
+}
+
+html[data-mode="dark"] .friends-section {
+  background: #121010;
+  border-top-color: rgba(232, 228, 224, 0.08);
+}
+
+.friends-section__in {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  text-align: center;
+}
+
+.friends-section__hdr {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.friends-section__hdr .eyebrow {
+  margin-bottom: 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted, #726b66);
+}
+
+.friends-section__h {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--foreground, #1a1818);
+  margin: 0 0 0.85rem;
+}
+
+.friends-section__sub {
+  font-size: clamp(0.95rem, 1.3vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--muted, #726b66);
+  margin: 0;
+  max-width: 52ch;
+}
+
+.friends-section__orbit-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.friends-section__pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  max-width: 720px;
+  margin-top: 0.5rem;
+}
+
+.friends-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--foreground-rgb, 26, 24, 24), 0.12);
+  background: rgba(var(--foreground-rgb, 26, 24, 24), 0.03);
+  color: var(--foreground, #1a1818);
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+html[data-mode="dark"] .friends-pill {
+  border-color: rgba(232, 228, 224, 0.12);
+  background: rgba(232, 228, 224, 0.04);
+}
+
+.friends-pill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(var(--foreground-rgb, 26, 24, 24), 0.35);
+  background: rgba(var(--foreground-rgb, 26, 24, 24), 0.07);
+}
+
+.friends-pill.is-active {
+  background: var(--foreground, #1a1818);
+  color: var(--background, #fbf9f6);
+  border-color: var(--foreground, #1a1818);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.friends-pill__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .friends-section {
+    padding: 4rem 0 4.5rem;
+  }
+  .orbit-center-card {
+    padding: 1rem 1.15rem;
+    max-width: 270px;
+  }
+  .orbit-friend-name {
+    font-size: 1rem;
+  }
+  .orbit-friend-bio {
+    font-size: 0.75rem;
+    max-width: 24ch;
+    margin-bottom: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-item-inner {
+    transition: none;
+  }
+}

@@ -1056,6 +1056,7 @@ html[data-mode="dark"] .tech-section{
 </style>
 <link rel="stylesheet" href="components/LogoLoop.css" />
 <link rel="stylesheet" href="components/FolderFloat.css" />
+<link rel="stylesheet" href="components/OrbitImages.css" />
 <script>try{if(localStorage.getItem('pabitra-mode')==='dark'){document.documentElement.dataset.mode='dark';document.querySelector('meta[name=theme-color]')}}catch(e){}</script>
 <script>
 /* modest devices get the same site with the heaviest per-frame effects eased off */
@@ -1400,6 +1401,21 @@ if(m<=2||c<=2||s)document.documentElement.classList.add('lite');})();
       <div class="tech-section__loop-wrap">
         <div id="techLogoLoop"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ Better Together ============ -->
+  <section id="friends" class="friends-section" aria-labelledby="friendsTitle">
+    <div class="shell friends-section__in">
+      <div class="friends-section__hdr">
+        <p class="eyebrow">Collaborators &amp; Friends</p>
+        <h2 class="friends-section__h" id="friendsTitle">Better Together</h2>
+        <p class="friends-section__sub">Great things are never built alone. Meet the fellow builders, creative minds, and engineers in my circle.</p>
+      </div>
+      <div class="friends-section__orbit-wrap">
+        <div id="friendsOrbit"></div>
+      </div>
+      <div class="friends-section__pills" id="friendsPillList" aria-label="Select friend to view"></div>
     </div>
   </section>
 </main>
@@ -3022,6 +3038,8 @@ try {
   import { initLogoLoop } from './components/LogoLoop.js';
   import { techLogos } from './components/techData.js';
   import { initFolderFloat } from './components/FolderFloat.js';
+  import { initOrbitImages } from './components/OrbitImages.js';
+  import { friendsList } from './components/friendsData.js';
 
   const container = document.getElementById('techLogoLoop');
   if (container) {
@@ -3037,6 +3055,115 @@ try {
       labels: 'inline',
       ariaLabel: 'Technologies I Use'
     });
+  }
+
+  /* ============ Better Together (OrbitImages) ============ */
+  const friendsContainer = document.getElementById('friendsOrbit');
+  const pillsContainer = document.getElementById('friendsPillList');
+
+  if (friendsContainer && friendsList && friendsList.length > 0) {
+    const SOCIAL_ICONS = {
+      github: `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>`,
+      linkedin: `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.97 0 1.76-.79 1.76-1.76s-.79-1.76-1.76-1.76-1.76.79-1.76 1.76.79 1.76 1.76 1.76m1.4 9.74v-8.37H5.06v8.37z"/></svg>`,
+      x: `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+      dribbble: `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 0C5.372 0 0 5.372 0 12c0 6.626 5.372 12 12 12 6.626 0 12-5.374 12-12 0-6.628-5.374-12-12-12zm7.95 5.568a10.024 10.024 0 0 1 2.062 6.002c-.378-.06-.776-.1-1.189-.1-2.072 0-3.993.818-5.419 2.148-.288-.636-.612-1.284-.972-1.92 3.036-1.428 5.09-3.792 5.518-6.13zm-7.95-3.57a9.986 9.986 0 0 1 5.922 1.942c-.394 2.088-2.22 4.22-4.99 5.52-1.248-2.316-2.244-4.524-2.856-6.42A9.972 9.972 0 0 1 12 1.998zm-3.948.888c.6 1.836 1.56 3.972 2.76 6.228-3.9 1.152-7.512 1.284-8.82 1.284a10.06 10.06 0 0 1 6.06-7.512zM1.998 12c0-.204.012-.408.036-.612 1.488 0 5.484-.156 9.696-1.44.396.696.756 1.404 1.08 2.112-4.224 2.172-6.504 6.036-6.852 6.672A9.96 9.96 0 0 1 1.998 12zm8.016 9.984a9.984 9.984 0 0 1-5.064-2.352c.384-.66 2.376-4.08 6.324-6.156 1.152 2.82 1.932 5.64 2.22 7.74a9.972 9.972 0 0 1-3.48.768zm5.544-1.32c-.276-1.932-.996-4.572-2.064-7.224 1.344-1.164 3.048-1.872 4.908-1.872.432 0 .84.036 1.236.096a10.016 10.016 0 0 1-4.08 9z"/></svg>`
+    };
+
+    let activeIdx = 0;
+
+    const renderCard = (index) => {
+      const f = friendsList[index] || friendsList[0];
+      const socialsHtml = Object.entries(f.socials || {})
+        .map(([platform, url]) => {
+          const icon = SOCIAL_ICONS[platform] || '';
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="orbit-friend-social" aria-label="${f.name} on ${platform}">${icon}</a>`;
+        })
+        .join('');
+
+      return `
+        <div class="orbit-center-card">
+          <span class="orbit-friend-badge"><i></i><span>0${index + 1} / 0${friendsList.length}</span></span>
+          <h3 class="orbit-friend-name">${f.name}</h3>
+          <p class="orbit-friend-role">${f.role}</p>
+          <p class="orbit-friend-bio">${f.bio}</p>
+          <div class="orbit-friend-actions">
+            <a href="${f.portfolio}" target="_blank" rel="noopener noreferrer" class="orbit-friend-portfolio">
+              <span>Portfolio</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <div class="orbit-friend-socials">
+              ${socialsHtml}
+            </div>
+          </div>
+        </div>
+      `;
+    };
+
+    const updateActiveFriend = (index) => {
+      if (activeIdx === index) return;
+      activeIdx = index;
+
+      const cardContainer = friendsContainer.querySelector('.orbit-center-content');
+      if (cardContainer) {
+        cardContainer.innerHTML = renderCard(index);
+      }
+
+      if (pillsContainer) {
+        const pills = pillsContainer.querySelectorAll('.friends-pill');
+        pills.forEach((p, idx) => {
+          p.classList.toggle('is-active', idx === index);
+          p.setAttribute('aria-pressed', (idx === index).toString());
+        });
+      }
+
+      const items = friendsContainer.querySelectorAll('.orbit-item');
+      items.forEach((it, idx) => {
+        it.classList.toggle('is-active', idx === index);
+      });
+    };
+
+    const orbit = initOrbitImages(friendsContainer, {
+      images: friendsList.map(f => ({ src: f.image, alt: f.name })),
+      shape: 'ellipse',
+      radiusX: 420,
+      radiusY: 110,
+      rotation: -7,
+      duration: 36,
+      itemSize: 84,
+      depth: 0.58,
+      showPath: true,
+      pathColor: 'rgba(128, 128, 128, 0.22)',
+      pathWidth: 1.5,
+      itemRadius: '50%',
+      shadow: 0.35,
+      hoverScale: 1.12,
+      hoverSpeed: 0.25,
+      draggable: true,
+      clickToFront: true,
+      centerContent: renderCard(0),
+      onItemClick: (index) => {
+        updateActiveFriend(index);
+      },
+      onFrontChange: (index) => {
+        updateActiveFriend(index);
+      }
+    });
+
+    if (pillsContainer && orbit) {
+      pillsContainer.innerHTML = '';
+      friendsList.forEach((friend, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `friends-pill${idx === 0 ? ' is-active' : ''}`;
+        btn.setAttribute('aria-pressed', (idx === 0).toString());
+        btn.innerHTML = `<span class="friends-pill__dot"></span><span>${friend.name}</span>`;
+        btn.addEventListener('click', () => {
+          orbit.bringToFront(idx);
+          updateActiveFriend(idx);
+        });
+        pillsContainer.appendChild(btn);
+      });
+    }
   }
 
   const folderContainer = document.getElementById('certificatesFolderFloat');
