@@ -56,7 +56,7 @@ export const friendsList = [
     name: "Dipu Gochayat",
     role: "Cloud & DevOps Architect",
     bio: "Automating cloud infrastructure, resilient Kubernetes deployments, and CI/CD pipelines.",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=320&h=320&fit=crop&crop=faces",
+    image: "components/dipu-gochayat.jpg",
     portfolio: "https://github.com",
     socials: {
       github: "https://github.com",
