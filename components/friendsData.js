@@ -44,12 +44,10 @@ export const friendsList = [
     name: "Sandeep Patra",
     role: "AI & ML Researcher",
     bio: "Passionate about computer vision, deep generative models, and LLM fine-tuning.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=320&h=320&fit=crop&crop=faces",
-    portfolio: "https://github.com",
+    image: "components/sandeep-patra.jpg",
+    portfolio: "https://www.instagram.com/sandy.noct?xtok=MXY0MGV0bnRkZzU1cA==",
     socials: {
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com"
+      instagram: "https://www.instagram.com/sandy.noct?xtok=MXY0MGV0bnRkZzU1cA=="
     }
   },
   {
