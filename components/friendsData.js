@@ -18,14 +18,14 @@ export const friendsList = [
   },
   {
     name: "Raghab Barik",
-    role: "Product & UI/UX Designer",
-    bio: "Crafting thoughtful digital interfaces, design systems, and delightful micro-interactions.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=320&h=320&fit=crop&crop=faces",
-    portfolio: "https://github.com",
+    role: "Product Designer & Developer",
+    bio: "Build a product, not just a website. Designing clean interfaces & modern web apps.",
+    image: "components/raghab-barik.jpg",
+    portfolio: "https://raghabportfolio.in",
     socials: {
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com",
-      github: "https://github.com"
+      github: "https://github.com/Raghabbarik",
+      linkedin: "https://www.linkedin.com/in/raghabbarik/",
+      instagram: "https://www.instagram.com/mr_raghab_786"
     }
   },
   {
