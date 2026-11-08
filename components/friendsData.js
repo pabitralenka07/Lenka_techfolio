@@ -33,7 +33,7 @@ export const friendsList = [
     role: "Software & Web Developer",
     bio: "Crafting modern web applications, scalable backends, and responsive interfaces.",
     image: "components/prabin-jena.jpg",
-    portfolio: "https://github.com/Prabin-Jena",
+    portfolio: "https://prabin-jena.github.io/Portfolio/",
     socials: {
       github: "https://github.com/Prabin-Jena",
       linkedin: "https://www.linkedin.com/in/prabin-jena-678668324",
