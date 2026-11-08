@@ -13,7 +13,7 @@ export const friendsList = [
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
-      x: "https://x.com"
+      instagram: "https://instagram.com"
     }
   },
   {
@@ -24,7 +24,7 @@ export const friendsList = [
     portfolio: "https://github.com",
     socials: {
       linkedin: "https://linkedin.com",
-      x: "https://x.com",
+      instagram: "https://instagram.com",
       github: "https://github.com"
     }
   },
@@ -37,7 +37,7 @@ export const friendsList = [
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
-      x: "https://x.com"
+      instagram: "https://instagram.com"
     }
   },
   {
@@ -49,7 +49,7 @@ export const friendsList = [
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
-      x: "https://x.com"
+      instagram: "https://instagram.com"
     }
   },
   {
@@ -61,7 +61,7 @@ export const friendsList = [
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
-      x: "https://x.com"
+      instagram: "https://instagram.com"
     }
   },
   {
@@ -72,7 +72,8 @@ export const friendsList = [
     portfolio: "https://github.com",
     socials: {
       github: "https://github.com",
-      linkedin: "https://linkedin.com"
+      linkedin: "https://linkedin.com",
+      instagram: "https://instagram.com"
     }
   }
 ];
