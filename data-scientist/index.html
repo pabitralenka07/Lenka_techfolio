@@ -61,9 +61,11 @@ html.embed.out .glow{opacity:1;visibility:visible;transition:opacity .4s ease}
 .print .peg{position:absolute;left:50%;top:-2px;width:14px;height:30px;margin-left:-7px;z-index:2;border-radius:3px 3px 2px 2px;
   background:linear-gradient(90deg,#b98d5c,#d9b384 45%,#a97d4f);box-shadow:0 2px 4px rgba(0,0,0,.35),inset 0 0 0 1px rgba(0,0,0,.08)}
 .print .peg::after{content:"";position:absolute;left:3px;right:3px;top:11px;height:3px;border-radius:2px;background:#8a8580;box-shadow:0 1px 0 rgba(255,255,255,.4)}
-.paper{display:block;height:100%;margin-top:14px;padding:clamp(5px,.5vw,8px);background:#fbfaf7;border-radius:2px;
-  box-shadow:0 1px 1px rgba(0,0,0,.12),0 24px 40px -18px rgba(0,0,0,.45),0 50px 80px -40px rgba(0,0,0,.35);transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s ease;cursor:zoom-in}
-.paper img{display:block;height:100%;width:auto;background:#ddd}
+.paper{position:relative;display:block;height:100%;margin-top:14px;padding:clamp(5px,.5vw,8px);background:#fbfaf7;border-radius:4px;
+  box-shadow:0 1px 1px rgba(0,0,0,.12),0 24px 40px -18px rgba(0,0,0,.45),0 50px 80px -40px rgba(0,0,0,.35);transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s ease;cursor:default!important;overflow:hidden}
+.paper img{display:block;height:100%;width:auto;background:#ddd;filter:blur(16px) brightness(.72)!important;transform:scale(1.12);pointer-events:none;-webkit-user-drag:none;user-select:none}
+.paper::after{content:"Coming Soon";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;padding:.55rem 1.25rem;border-radius:999px;background:rgba(18,17,17,.88);color:#E8E4E0;border:1px solid rgba(232,228,224,.3);font-family:'Onest',ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:clamp(.75rem,1.1vw,.875rem);font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;box-shadow:0 12px 28px -4px rgba(0,0,0,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);pointer-events:none}
+html[data-mode="dark"] .paper::after{background:rgba(26,24,24,.92);border-color:rgba(232,228,224,.22)}
 .print.dark .paper{background:#151414}
 .print:hover .paper,.paper:focus-visible{transform:translateY(-6px) scale(1.025);box-shadow:0 1px 1px rgba(0,0,0,.12),0 34px 54px -18px rgba(0,0,0,.5),0 60px 90px -40px rgba(0,0,0,.4)}
 /* a carousel hangs as a little stack of prints */
@@ -71,8 +73,7 @@ html.embed.out .glow{opacity:1;visibility:visible;transition:opacity .4s ease}
 .print.deck .paper::before,.print.deck .paper::after{content:"";position:absolute;inset:0;z-index:-1;background:#efece6;border-radius:2px;box-shadow:0 10px 20px -10px rgba(0,0,0,.4)}
 .print.deck .paper::before{transform:translate(9px,7px) rotate(2.2deg)}
 .print.deck .paper::after{transform:translate(17px,13px) rotate(4.2deg);background:#e4e0d8}
-.print .badge{position:absolute;left:clamp(10px,1vw,14px);bottom:clamp(10px,1vw,14px);padding:6px 10px;border-radius:999px;background:rgba(10,10,10,.82);color:#fff;
-  font-size:11.5px;font-weight:600;letter-spacing:.02em;pointer-events:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.print .badge{display:none!important}
 .w-foot{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;align-items:center;gap:16px;padding:0 max(16px,env(safe-area-inset-right)) clamp(14px,2.6vh,26px) max(16px,env(safe-area-inset-left));max-width:88rem;margin:0 auto}
 @media (min-width:1024px){.w-foot{padding-inline:88px}}
 .w-bar{flex:1;height:2px;border-radius:2px;background:color-mix(in srgb,var(--wfg) 16%,transparent);overflow:hidden}
@@ -87,7 +88,7 @@ html.embed.out .glow{opacity:1;visibility:visible;transition:opacity .4s ease}
 .lb__t{font-size:14px;font-weight:600}.lb__t span{opacity:.55;font-weight:500;margin-left:10px}
 .lb__x{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);font-size:20px;line-height:1}
 .lb__stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:0;padding:0 max(16px,7vw)}
-.lb__stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:3px;box-shadow:0 30px 80px -20px rgba(0,0,0,.8);transition:opacity .2s ease,transform .35s cubic-bezier(.16,1,.3,1)}
+.lb__stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:3px;box-shadow:0 30px 80px -20px rgba(0,0,0,.8);transition:opacity .2s ease,transform .35s cubic-bezier(.16,1,.3,1);filter:blur(16px) brightness(.72)}
 .lb__stage img.swap{opacity:0;transform:scale(.985)}
 .lb__stage.ld::after{content:"";position:absolute;left:50%;top:50%;translate:-50% -50%;width:min(86%,calc(78vh * var(--ar,.8)));aspect-ratio:var(--ar,.8);max-height:92%;border-radius:3px;pointer-events:none;
   background:linear-gradient(100deg,#231F1F 30%,#2F2A2A 50%,#231F1F 70%);background-size:220% 100%;animation:lbSk 1.25s linear infinite}
@@ -797,8 +798,8 @@ function open(items, i, title){
 function close(){ lb.classList.remove('open'); setTimeout(() => { lb.hidden = true; }, 360); lastFocus?.focus?.({ preventScroll: true }); }
 host.addEventListener('click', e => {
   const b = e.target.closest('.paper'); if (!b) return;
-  const wEl = b.closest('.world'), w = WORLDS[+wEl.dataset.i], ii = +b.closest('.print').dataset.ii, it = w.items[ii];
-  if (it.deck) open(it.deck, 0, it.title); else open(w.items, ii, w.label);
+  // Coming Soon: preview images are blurred; lightbox disabled
+  e.preventDefault();
 });
 document.getElementById('lbX').addEventListener('click', close);
 document.getElementById('lbP').addEventListener('click', () => show(L.i - 1));
