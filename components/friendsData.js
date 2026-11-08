@@ -79,9 +79,11 @@ export const friendsList = [
     role: "Data Scientist & Analytics",
     bio: "Turning raw numbers into actionable predictive intelligence and visual storytelling.",
     image: "components/priyanka-sahoo.jpg",
-    portfolio: "https://www.linkedin.com/in/priyanka-priyadarsani-sahoo-791b62396",
+    portfolio: "https://github.com/priyankasahoo15",
     socials: {
-      linkedin: "https://www.linkedin.com/in/priyanka-priyadarsani-sahoo-791b62396"
+      github: "https://github.com/priyankasahoo15",
+      linkedin: "https://www.linkedin.com/in/priyanka-priyadarsani-sahoo-791b62396",
+      instagram: "https://www.instagram.com/priyankaps602?cplk=dHIzZXEwMnp4NHl5"
     }
   }
 ];
