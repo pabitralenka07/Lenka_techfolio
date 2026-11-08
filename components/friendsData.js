@@ -66,7 +66,7 @@ export const friendsList = [
     name: "Kiran Singh",
     role: "Software Engineer",
     bio: "Focused on algorithmic problem solving, distributed systems, and low-latency backends.",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=320&h=320&fit=crop&crop=faces",
+    image: "components/kiran-singh.jpg",
     portfolio: "https://github.com",
     socials: {
       github: "https://github.com",
