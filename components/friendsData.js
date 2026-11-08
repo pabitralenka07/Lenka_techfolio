@@ -8,12 +8,12 @@ export const friendsList = [
     name: "Ronali Jena",
     role: "Full-Stack Developer",
     bio: "Building high-throughput web systems, microservices, and modern UI architectures.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=320&h=320&fit=crop&crop=faces",
-    portfolio: "https://github.com",
+    image: "components/ronali-jena.jpg",
+    portfolio: "https://github.com/ronalijena06",
     socials: {
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com"
+      github: "https://github.com/ronalijena06",
+      linkedin: "https://www.linkedin.com/in/ronali-jena-6a4486339",
+      instagram: "https://www.instagram.com/hey__ruhhhh"
     }
   },
   {
