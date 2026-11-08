@@ -29,6 +29,18 @@ export const friendsList = [
     }
   },
   {
+    name: "Prabin Jena",
+    role: "Software & Web Developer",
+    bio: "Crafting modern web applications, scalable backends, and responsive interfaces.",
+    image: "components/prabin-jena.jpg",
+    portfolio: "https://github.com/Prabin-Jena",
+    socials: {
+      github: "https://github.com/Prabin-Jena",
+      linkedin: "https://www.linkedin.com/in/prabin-jena-678668324",
+      instagram: "https://www.instagram.com/prabin__j?dlrf=cTJqeXk5ejFnMDQ0"
+    }
+  },
+  {
     name: "Sandeep Patra",
     role: "AI & ML Researcher",
     bio: "Passionate about computer vision, deep generative models, and LLM fine-tuning.",
