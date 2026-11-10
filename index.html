@@ -2058,13 +2058,13 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     H = Math.round(L + EXT_MAX + 170);
     wrap.style.height = H + 'px';
     const btn = document.querySelector('.hdr__contact');
-    if (btn && btn.offsetWidth && vw >= 1200){
-      // hang to the left of the 'Get in touch' button, so the button sits right to the pull rope
-      offset = (vw - btn.getBoundingClientRect().left) + 2.2 * rem;
-    } else if (btn && btn.offsetWidth && vw < 1200){
+    if (vw >= 1024){
+      // hang on the right side of the page (to the right of 'Get in touch')
+      offset = 3.0 * rem;
+    } else if (btn && btn.offsetWidth && vw < 1024){
       offset = (vw - btn.getBoundingClientRect().left) + 1.8 * rem;
     } else {
-      offset = 2.4 * rem;
+      offset = 3.0 * rem;
     }
     W = Math.min(vw, Math.max(340, Math.ceil(offset + 80)));
     wrap.style.width = W + 'px';
