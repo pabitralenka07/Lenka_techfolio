@@ -52,14 +52,14 @@ export const friendsList = [
   },
   {
     name: "Dipu Gochayat",
-    role: "Cloud & DevOps Architect",
-    bio: "Automating cloud infrastructure, resilient Kubernetes deployments, and CI/CD pipelines.",
+    role: "Software Developer & Backend Engineer",
+    bio: "Passionate about Java development, backend engineering, and cloud systems.",
     image: "components/dipu-gochayat.jpg",
-    portfolio: "https://github.com",
+    portfolio: "https://dipu-portfolio-hazel.vercel.app/",
     socials: {
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com"
+      github: "https://github.com/dipu-gochhayat",
+      linkedin: "https://www.linkedin.com/in/dipu-gochhayat",
+      instagram: "https://www.instagram.com/mr_dipu.g"
     }
   },
   {
