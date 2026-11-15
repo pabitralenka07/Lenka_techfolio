@@ -837,6 +837,41 @@ html:not([data-mode="dark"]) .spill{mix-blend-mode:normal;background:linear-grad
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .mform__hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
 
+/* ---------- certificate modal ---------- */
+.cert-modal{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(8,7,7,0.86);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);opacity:0;transition:opacity .35s ease}
+.cert-modal.open{opacity:1}
+.cert-modal__panel{position:relative;width:100%;max-width:54rem;max-height:calc(100dvh - 2rem);display:flex;flex-direction:column;border-radius:1.5rem;background:#181616;border:1px solid rgba(255,255,255,0.1);box-shadow:0 25px 60px -15px rgba(0,0,0,0.7);overflow:hidden;transform:scale(0.96) translateY(12px);opacity:0;transition:transform .4s var(--e-spring),opacity .35s ease}
+.cert-modal.open .cert-modal__panel{transform:none;opacity:1}
+.cert-modal.closing .cert-modal__panel{transform:scale(0.96) translateY(12px);opacity:0}
+.cert-modal__header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.4rem;border-bottom:1px solid rgba(255,255,255,0.08);background:#1f1c1c}
+.cert-modal__meta{display:flex;align-items:center;gap:.75rem}
+.cert-modal__counter{display:inline-flex;align-items:center;padding:.2rem .6rem;border-radius:9999px;background:rgba(255,255,255,0.08);color:#d4cfc9;font-size:.75rem;font-weight:600;letter-spacing:.03em}
+.cert-modal__issuer{color:#e6e1db;font-size:.875rem;font-weight:600}
+.cert-modal__close{width:2.25rem;height:2.25rem;display:grid;place-items:center;border-radius:9999px;border:none;background:rgba(255,255,255,0.06);color:#cfcac4;cursor:pointer;transition:background .2s,color .2s}
+.cert-modal__close:hover{background:rgba(255,255,255,0.15);color:#fff}
+.cert-modal__body{flex:1;overflow-y:auto;padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:1rem;background:#121010}
+.cert-modal__preview{width:100%;max-width:100%;display:flex;justify-content:center;align-items:center;background:#0a0909;border-radius:1rem;padding:0.5rem;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05)}
+.cert-modal__preview img{max-width:100%;max-height:55vh;width:auto;height:auto;border-radius:.6rem;object-fit:contain;box-shadow:0 12px 36px rgba(0,0,0,0.5);cursor:pointer;transition:transform .2s ease}
+.cert-modal__preview img:hover{transform:scale(1.015)}
+.cert-modal__info{width:100%;text-align:left;display:flex;flex-direction:column;gap:.5rem;padding:0 .25rem}
+.cert-modal__title{color:#f5f0eb;font-size:1.15rem;font-weight:600;line-height:1.35;margin:0}
+.cert-modal__skills{display:flex;flex-wrap:wrap;gap:.4rem;margin:0}
+.cert-modal__skill{display:inline-block;padding:.25rem .6rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);border-radius:9999px;color:#c7c1bb;font-size:.75rem}
+.cert-modal__footer{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.4rem;border-top:1px solid rgba(255,255,255,0.08);background:#1a1717;gap:1rem}
+.cert-modal__nav{display:flex;align-items:center;gap:.5rem}
+.cert-modal__nav-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .9rem;border-radius:9999px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#e2ded9;font-size:.8125rem;font-weight:500;cursor:pointer;transition:background .2s,border-color .2s}
+.cert-modal__nav-btn:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.25)}
+.cert-modal__btn--view{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:9999px;background:#f5f0eb;color:#181616;font-size:.8125rem;font-weight:600;text-decoration:none;transition:background .2s,transform .2s}
+.cert-modal__btn--view:hover{background:#fff;transform:translateY(-1px)}
+@media (max-width:640px){
+  .cert-modal{padding:0}
+  .cert-modal__panel{max-height:100dvh;height:100dvh;border-radius:0;border:none}
+  .cert-modal__preview img{max-height:46vh}
+  .cert-modal__footer{flex-direction:column-reverse;gap:.75rem;align-items:stretch}
+  .cert-modal__nav{justify-content:space-between}
+  .cert-modal__btn--view{justify-content:center}
+}
+
 /* ---------- footer ---------- */
 /* the footer slides up over the last 32px of the section above, so its rounded corners show that
    section's real background (gradients and glows included) instead of a flat patch of colour */
@@ -1643,6 +1678,48 @@ if(m<=2||c<=2||s)document.documentElement.classList.add('lite');})();
       <p id="mOkP">Your email app has opened with your message ready to go. Press send there and I'll reply within one business day.</p>
       <p class="msuccess__alt">Email app didn't open? Write to <a data-mail href="#contact">my email</a>.</p>
       <button class="pill pill--dark" id="mDone"><span class="pill__in" data-h="s 1 1.04" data-hs="320 18" data-ht=".pill">Close</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Certificate Modal ============ -->
+<div class="modal cert-modal" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle" hidden>
+  <div class="cert-modal__panel" id="certModalPanel">
+    <div class="cert-modal__header">
+      <div class="cert-modal__meta">
+        <span class="cert-modal__counter" id="certModalCounter">1 of 7</span>
+        <span class="cert-modal__issuer" id="certModalIssuer">IBM · Coursera</span>
+      </div>
+      <button class="cert-modal__close" id="certModalClose" aria-label="Close certificate viewer">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="cert-modal__body">
+      <div class="cert-modal__preview">
+        <img id="certModalImage" src="assets/certificates/cert-web-dev.webp" alt="Certificate Preview" />
+      </div>
+      <div class="cert-modal__info">
+        <h3 class="cert-modal__title" id="certModalTitle">Certificate Title</h3>
+        <div class="cert-modal__skills" id="certModalSkills"></div>
+      </div>
+    </div>
+    <div class="cert-modal__footer">
+      <div class="cert-modal__nav">
+        <button class="cert-modal__nav-btn" id="certModalPrev" type="button" aria-label="Previous certificate">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <span>Prev</span>
+        </button>
+        <button class="cert-modal__nav-btn" id="certModalNext" type="button" aria-label="Next certificate">
+          <span>Next</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="cert-modal__actions">
+        <a class="cert-modal__btn cert-modal__btn--view" id="certModalPdf" href="" target="_blank" rel="noopener noreferrer">
+          <span>View Document</span>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -3168,21 +3245,131 @@ try {
     }
   }
 
+  const CERTIFICATES = [
+    {
+      id: 'cert-web-dev',
+      label: 'Web Dev · IBM',
+      title: 'Introduction to Web Development with HTML, CSS, JavaScript',
+      issuer: 'IBM (Coursera)',
+      image: 'assets/certificates/cert-web-dev.webp',
+      pdf: 'assets/certificates/cert-web-dev.pdf',
+      skills: ['HTML5', 'CSS3', 'JavaScript', 'Web Architecture', 'Responsive UI']
+    },
+    {
+      id: 'cert-ml-python',
+      label: 'ML with Python · IBM',
+      title: 'Machine Learning with Python: Build Real-World ML Models',
+      issuer: 'IBM (Coursera)',
+      image: 'assets/certificates/cert-ml-python.webp',
+      pdf: 'assets/certificates/cert-ml-python.pdf',
+      skills: ['Machine Learning', 'Python', 'Scikit-learn', 'Predictive Modeling']
+    },
+    {
+      id: 'cert-ai-everyone',
+      label: 'AI For Everyone · DeepLearning.AI',
+      title: 'AI For Everyone by Andrew Ng',
+      issuer: 'DeepLearning.AI (Coursera)',
+      image: 'assets/certificates/cert-ai-everyone.webp',
+      pdf: 'assets/certificates/cert-ai-everyone.pdf',
+      skills: ['AI Strategy', 'Deep Learning', 'Neural Networks', 'AI Ethics']
+    },
+    {
+      id: 'cert-cloud-computing',
+      label: 'Cloud Computing · IBM',
+      title: 'Introduction to Cloud Computing',
+      issuer: 'IBM (Coursera)',
+      image: 'assets/certificates/cert-cloud-computing.webp',
+      pdf: 'assets/certificates/cert-cloud-computing.pdf',
+      skills: ['Cloud Architecture', 'IaaS / PaaS / SaaS', 'Hybrid Cloud', 'DevOps']
+    },
+    {
+      id: 'cert-ai-claude',
+      label: 'AI & Claude · be10x',
+      title: 'AI Tools & Claude Workshop',
+      issuer: 'be10x',
+      image: 'assets/certificates/cert-ai-claude.webp',
+      pdf: 'assets/certificates/cert-ai-claude.pdf',
+      skills: ['Claude AI', 'Prompt Engineering', 'AI Coding & Automation']
+    },
+    {
+      id: 'cert-google-gemini',
+      label: 'Gemini AI · Google Cloud',
+      title: 'Google Workspace with Gemini: Foundations of Your AI Workflow',
+      issuer: 'Google Cloud (Coursera)',
+      image: 'assets/certificates/cert-google-gemini.webp',
+      pdf: 'assets/certificates/cert-google-gemini.pdf',
+      skills: ['Gemini', 'Google Workspace', 'Generative AI Workflows']
+    },
+    {
+      id: 'cert-sih-hackathon',
+      label: 'SIH Hackathon 2026 · NIT',
+      title: 'Internal Hackathon for SIH-2026 (Smart India Hackathon)',
+      issuer: 'MoE Innovation Cell & Nalanda Inst. of Tech',
+      image: 'assets/certificates/cert-sih-hackathon.webp',
+      pdf: 'assets/certificates/cert-sih-hackathon.webp',
+      skills: ['Rapid Prototyping', 'Teamwork', 'Full-Stack Innovation']
+    }
+  ];
+
+  let currentCertIdx = 0;
+  const certModal = $('#certModal');
+  const certImg = $('#certModalImage');
+  const certTitle = $('#certModalTitle');
+  const certIssuer = $('#certModalIssuer');
+  const certCounter = $('#certModalCounter');
+  const certSkills = $('#certModalSkills');
+  const certPdf = $('#certModalPdf');
+
+  function renderCert(idx) {
+    currentCertIdx = ((idx % CERTIFICATES.length) + CERTIFICATES.length) % CERTIFICATES.length;
+    const cert = CERTIFICATES[currentCertIdx];
+    if (!cert) return;
+    if (certImg) {
+      certImg.src = cert.image;
+      certImg.alt = cert.title;
+    }
+    if (certTitle) certTitle.textContent = cert.title;
+    if (certIssuer) certIssuer.textContent = cert.issuer;
+    if (certCounter) certCounter.textContent = `${currentCertIdx + 1} of ${CERTIFICATES.length}`;
+    if (certPdf) certPdf.href = cert.pdf;
+    if (certSkills) {
+      certSkills.innerHTML = cert.skills.map(s => `<span class="cert-modal__skill">${s}</span>`).join('');
+    }
+  }
+
+  function openCertificateModal(idx = 0) {
+    renderCert(idx);
+    if (certModal) openLayer(certModal, closeCertificateModal);
+  }
+
+  function closeCertificateModal() {
+    if (certModal) closeLayer(certModal);
+  }
+
+  $('#certModalClose')?.addEventListener('click', closeCertificateModal);
+  $('#certModalPrev')?.addEventListener('click', () => renderCert(currentCertIdx - 1));
+  $('#certModalNext')?.addEventListener('click', () => renderCert(currentCertIdx + 1));
+  certImg?.addEventListener('click', () => {
+    const cert = CERTIFICATES[currentCertIdx];
+    if (cert?.pdf) window.open(cert.pdf, '_blank');
+  });
+  certModal?.addEventListener('click', e => {
+    if (e.target === certModal) closeCertificateModal();
+  });
+  window.addEventListener('keydown', e => {
+    if (!certModal || certModal.hidden) return;
+    if (e.key === 'ArrowLeft') renderCert(currentCertIdx - 1);
+    if (e.key === 'ArrowRight') renderCert(currentCertIdx + 1);
+  });
+
   const folderContainer = document.getElementById('certificatesFolderFloat');
   if (folderContainer) {
     initFolderFloat(folderContainer, {
-      items: [
-        { label: 'AI/ML Specialist · Mind Brain', value: 'ai-ml-engineer/' },
-        { label: 'Web Developer · Internpy', value: 'web-developer/' },
-        { label: 'B.Tech in Computer Science', value: '#about' },
-        { label: 'Python Specialist · NIT', value: 'python-developer/' },
-        { label: 'Data Science & Analytics', value: 'data-scientist/' },
-        { label: 'Creative Photography', value: 'photographer/' }
-      ],
-      label: 'Certificates & Awards',
-      sublabel: '6 badges',
+      items: CERTIFICATES.map((c, i) => ({ label: c.label, value: i })),
+      label: 'Certificates & Credentials',
+      sublabel: `${CERTIFICATES.length} verified badges`,
       trigger: 'hover',
-      closeOnSelect: true,
+      closeOnSelect: false,
       physics: true,
       drift: 0.5,
       folderColor: '#2b2727',
@@ -3191,24 +3378,19 @@ try {
       itemColor: '#f5f0eb',
       itemTextColor: '#181616',
       labelColor: '#f0ece7',
-      width: 210,
-      height: 148,
+      width: 215,
+      height: 152,
       radius: 14,
-      spread: 180,
-      lift: 26,
+      spread: 200,
+      lift: 28,
       tilt: 8,
-      flapAngle: 34,
+      flapAngle: 36,
       restAngle: 16,
       openDuration: 520,
-      stagger: 45,
+      stagger: 42,
       bounce: 0.3,
       onSelect: (value, index) => {
-        if (value && value.startsWith('#')) {
-          const el = document.querySelector(value);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        } else if (value) {
-          window.location.href = value;
-        }
+        openCertificateModal(Number(value ?? index));
       }
     });
   }
