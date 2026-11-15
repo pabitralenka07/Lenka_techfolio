@@ -3248,7 +3248,7 @@ try {
   const CERTIFICATES = [
     {
       id: 'cert-web-dev',
-      label: 'Web Dev · IBM',
+      label: 'Web Development',
       title: 'Introduction to Web Development with HTML, CSS, JavaScript',
       issuer: 'IBM (Coursera)',
       image: 'assets/certificates/cert-web-dev.webp',
@@ -3257,7 +3257,7 @@ try {
     },
     {
       id: 'cert-ml-python',
-      label: 'ML with Python · IBM',
+      label: 'Machine Learning with Python',
       title: 'Machine Learning with Python: Build Real-World ML Models',
       issuer: 'IBM (Coursera)',
       image: 'assets/certificates/cert-ml-python.webp',
@@ -3266,7 +3266,7 @@ try {
     },
     {
       id: 'cert-ai-everyone',
-      label: 'AI For Everyone · DeepLearning.AI',
+      label: 'AI For Everyone',
       title: 'AI For Everyone by Andrew Ng',
       issuer: 'DeepLearning.AI (Coursera)',
       image: 'assets/certificates/cert-ai-everyone.webp',
@@ -3275,7 +3275,7 @@ try {
     },
     {
       id: 'cert-cloud-computing',
-      label: 'Cloud Computing · IBM',
+      label: 'Cloud Computing',
       title: 'Introduction to Cloud Computing',
       issuer: 'IBM (Coursera)',
       image: 'assets/certificates/cert-cloud-computing.webp',
@@ -3284,7 +3284,7 @@ try {
     },
     {
       id: 'cert-ai-claude',
-      label: 'AI & Claude · be10x',
+      label: 'AI & Claude Workshop',
       title: 'AI Tools & Claude Workshop',
       issuer: 'be10x',
       image: 'assets/certificates/cert-ai-claude.webp',
@@ -3293,7 +3293,7 @@ try {
     },
     {
       id: 'cert-google-gemini',
-      label: 'Gemini AI · Google Cloud',
+      label: 'Google Workspace with Gemini',
       title: 'Google Workspace with Gemini: Foundations of Your AI Workflow',
       issuer: 'Google Cloud (Coursera)',
       image: 'assets/certificates/cert-google-gemini.webp',
@@ -3302,7 +3302,7 @@ try {
     },
     {
       id: 'cert-sih-hackathon',
-      label: 'SIH Hackathon 2026 · NIT',
+      label: 'SIH Hackathon 2026',
       title: 'Internal Hackathon for SIH-2026 (Smart India Hackathon)',
       issuer: 'MoE Innovation Cell & Nalanda Inst. of Tech',
       image: 'assets/certificates/cert-sih-hackathon.webp',
@@ -3312,13 +3312,13 @@ try {
   ];
 
   let currentCertIdx = 0;
-  const certModal = $('#certModal');
-  const certImg = $('#certModalImage');
-  const certTitle = $('#certModalTitle');
-  const certIssuer = $('#certModalIssuer');
-  const certCounter = $('#certModalCounter');
-  const certSkills = $('#certModalSkills');
-  const certPdf = $('#certModalPdf');
+  const certModal = document.getElementById('certModal');
+  const certImg = document.getElementById('certModalImage');
+  const certTitle = document.getElementById('certModalTitle');
+  const certIssuer = document.getElementById('certModalIssuer');
+  const certCounter = document.getElementById('certModalCounter');
+  const certSkills = document.getElementById('certModalSkills');
+  const certPdf = document.getElementById('certModalPdf');
 
   function renderCert(idx) {
     currentCertIdx = ((idx % CERTIFICATES.length) + CERTIFICATES.length) % CERTIFICATES.length;
@@ -3339,25 +3339,39 @@ try {
 
   function openCertificateModal(idx = 0) {
     renderCert(idx);
-    if (certModal) openLayer(certModal, closeCertificateModal);
+    if (!certModal) return;
+    certModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      certModal.classList.add('open');
+      certModal.classList.remove('closing');
+    });
   }
 
   function closeCertificateModal() {
-    if (certModal) closeLayer(certModal);
+    if (!certModal || certModal.hidden) return;
+    certModal.classList.remove('open');
+    certModal.classList.add('closing');
+    setTimeout(() => {
+      certModal.hidden = true;
+      certModal.classList.remove('closing');
+      document.body.style.overflow = '';
+    }, 320);
   }
 
-  $('#certModalClose')?.addEventListener('click', closeCertificateModal);
-  $('#certModalPrev')?.addEventListener('click', () => renderCert(currentCertIdx - 1));
-  $('#certModalNext')?.addEventListener('click', () => renderCert(currentCertIdx + 1));
+  document.getElementById('certModalClose')?.addEventListener('click', closeCertificateModal);
+  document.getElementById('certModalPrev')?.addEventListener('click', () => renderCert(currentCertIdx - 1));
+  document.getElementById('certModalNext')?.addEventListener('click', () => renderCert(currentCertIdx + 1));
   certImg?.addEventListener('click', () => {
     const cert = CERTIFICATES[currentCertIdx];
-    if (cert?.pdf) window.open(cert.pdf, '_blank');
+    if (cert?.image) window.open(cert.image, '_blank');
   });
   certModal?.addEventListener('click', e => {
     if (e.target === certModal) closeCertificateModal();
   });
   window.addEventListener('keydown', e => {
     if (!certModal || certModal.hidden) return;
+    if (e.key === 'Escape') closeCertificateModal();
     if (e.key === 'ArrowLeft') renderCert(currentCertIdx - 1);
     if (e.key === 'ArrowRight') renderCert(currentCertIdx + 1);
   });
@@ -3366,8 +3380,8 @@ try {
   if (folderContainer) {
     initFolderFloat(folderContainer, {
       items: CERTIFICATES.map((c, i) => ({ label: c.label, value: i })),
-      label: 'Certificates & Credentials',
-      sublabel: `${CERTIFICATES.length} verified badges`,
+      label: 'Certificates',
+      sublabel: `${CERTIFICATES.length} certificates`,
       trigger: 'hover',
       closeOnSelect: false,
       physics: true,
