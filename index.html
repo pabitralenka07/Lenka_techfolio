@@ -2460,7 +2460,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
   function loadRoom(i){
     if (frames[i]) return;
     const f = document.createElement('iframe');
-    f.src = ROUTES[i] + '?embed';
+    f.src = ROUTES[i] + '?embed&v=20261115';
     f.title = TITLES[i];
     f.tabIndex = -1;
     f.addEventListener('load', () => { ready[i] = true; if (i === cur) frameReady = true; f.contentWindow?.postMessage({ wall: 'mode', mode: root.dataset.mode === 'dark' ? 'dark' : 'light' }, location.origin === 'null' ? '*' : location.origin); }, { once: true });
