@@ -42,12 +42,14 @@ export const friendsList = [
   },
   {
     name: "Sandeep Patra",
-    role: "AI & ML Researcher",
-    bio: "Passionate about computer vision, deep generative models, and LLM fine-tuning.",
+    role: "Developer & Data Science Enthusiast",
+    bio: "Passionate about creating meaningful digital experiences, data science, and intelligent solutions.",
     image: "components/sandeep-patra.jpg",
-    portfolio: "https://www.instagram.com/sandy.noct?xtok=MXY0MGV0bnRkZzU1cA==",
+    portfolio: "https://sandeep-portfolio-two-beta.vercel.app/",
     socials: {
-      instagram: "https://www.instagram.com/sandy.noct?xtok=MXY0MGV0bnRkZzU1cA=="
+      github: "https://github.com/SANDEEP23-git",
+      linkedin: "https://www.linkedin.com/in/sandeep-patra-07b594302",
+      instagram: "https://www.instagram.com/sandy.noct"
     }
   },
   {
